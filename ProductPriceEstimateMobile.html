@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Final Price Approximate Calculation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .result-box {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Product Final Price Approximate Calculation</h2>
+        <input type="number" id="valueA" placeholder="Change to product price in CAD">
+        <input type="number" id="valueB" placeholder="Change to interest rate" value="1.2">
+        <input type="number" id="valueC" placeholder="Change to approximate weight per gram">
+        <input type="number" id="valueD" placeholder="Shipping fee per kg" value="30">
+        <input type="number" id="valueE" placeholder="CAD/Toman conversion" value="42500">
+        <button onclick="calculate()">Calculate</button>
+        <input type="text" id="result" class="result-box" readonly placeholder="Result will be displayed here">
+    </div>
+    <script>
+        function calculate() {
+            let a = parseFloat(document.getElementById('valueA').value);
+            let b = parseFloat(document.getElementById('valueB').value);
+            let c = parseFloat(document.getElementById('valueC').value);
+            let d = parseFloat(document.getElementById('valueD').value);
+            let e = parseFloat(document.getElementById('valueE').value);
+
+            if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d) || isNaN(e)) {
+                document.getElementById('result').value = 'Please enter valid numbers';
+                return;
+            }
+
+            let result = (a * 1.13 * b + c * d) * e;
+            let roundedResult = Math.round(result / 10000) * 10000;
+            document.getElementById('result').value = 'Result: ' + roundedResult;
+        }
+    </script>
+</body>
+</html>
